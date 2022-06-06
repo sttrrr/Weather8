@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpenWeather"
+    android:background="@drawable/phonemain"
+    android:textColor="#FF3700B3"
+
+    >
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <ImageView
+                android:id="@+id/forecast_icon"
+                android:layout_width="110dp"
+                android:layout_height="70px"
+                />
+            <TextView
+                android:id="@+id/min_temp_forecast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/max_temp_forecast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+                android:id="@+id/date1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <ImageView
+                android:id="@+id/forecast_icon1"
+                android:layout_width="110dp"
+                android:layout_height="70px"
+                />
+            <TextView
+                android:id="@+id/min_temp_forecast1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/max_temp_forecast1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+                android:id="@+id/date2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <ImageView
+                android:id="@+id/forecast_icon2"
+                android:layout_width="110dp"
+                android:layout_height="70px"
+                />
+            <TextView
+                android:id="@+id/min_temp_forecast2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/max_temp_forecast2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

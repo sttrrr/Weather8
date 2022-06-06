@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpenWeather"
+    android:background="@drawable/phonemain"
+    android:textColor="#FF3700B3"
+    android:id="@+id/openWeatherAct"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="272dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- главный блок -->
+        <TextView
+            android:id="@+id/cityTextBiew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/merriweather_light"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tempWeather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/merriweather_light"
+            android:textAlignment="center"
+            android:textSize="60sp" />
+
+                <ImageView
+                    android:id="@+id/weather_icon"
+                    android:layout_width="148dp"
+                    android:layout_height="103dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/merriweather_light"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+
+            </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="200dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+
+        <TableRow>
+
+            <!-- иконки элементов -->
+            <ImageView
+                android:id="@+id/wind_icon"
+                android:layout_width="110dp"
+                android:layout_height="70px"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="0.2"
+                app:srcCompat="@drawable/windturbine" />
+
+            <ImageView
+                android:id="@+id/humidity_icon"
+                android:layout_width="133dp"
+                android:layout_height="70px"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="0.3"
+                app:srcCompat="@drawable/raindrops"
+                tools:layout_editor_absoluteX="138dp"
+                tools:layout_editor_absoluteY="333dp" />
+
+            <ImageView
+                android:id="@+id/pressure_icon"
+                android:layout_width="70px"
+                android:layout_height="70px"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.3"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/lowtemperature" />
+        </TableRow>
+
+
+        <!-- значения атрибутов -->
+        <TableRow>
+
+            <TextView
+                android:id="@+id/wind_text"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0.2"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/humidity_text"
+                android:layout_width="124dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0.3"
+                android:textAlignment="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/pressure_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0.3"
+                android:textAlignment="center"
+                android:visibility="visible" />
+        </TableRow>
+
+
+        <!-- подпись к атрибутам -->
+        <TableRow>
+
+            <TextView
+                android:id="@+id/wind_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.2"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/wind_text"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/hud_desk"
+                android:layout_width="70px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.2"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/hud_text"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/pressure_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/text_pressure"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+        </TableRow>
+
+
+        <!-- иконки минимальной температуры, максимальной и ощущений -->
+        <TableRow>
+
+            <ImageView
+                android:id="@+id/min_icon"
+                android:layout_width="70px"
+                android:layout_height="70px"
+                android:layout_weight="0.3"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/iconstempmin"
+                app:tint="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/max_icon"
+                android:layout_width="70px"
+                android:layout_height="70px"
+                android:layout_weight="0.3"
+                android:textAlignment="center"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/iconstempmax"
+                app:tint="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/feels_like_icon"
+                android:layout_width="70px"
+                android:layout_height="70px"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.3"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginBottom="5dp"
+                app:srcCompat="@drawable/iconsweathernews1"
+                app:tint="@android:color/black" />
+        </TableRow>
+
+
+        <!-- значения атрибутов  -->
+        <TableRow>
+
+            <TextView
+                android:id="@+id/min_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0.3"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/max_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0.3"
+                android:textAlignment="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/feels_like_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="0.3"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginLeft="5dp"/>
+        </TableRow>
+
+
+        <!-- подписи к минимальной температуры, максимальной и ощущений -->
+        <TableRow>
+
+            <TextView
+                android:id="@+id/min_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/minTemp"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/max_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/maxTemp"
+                android:textAlignment="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/feels_like_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.3"
+                android:fontFamily="@font/merriweather_light"
+                android:text="@string/feels_like"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginLeft="5dp"/>
+        </TableRow>
+
+    </TableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>

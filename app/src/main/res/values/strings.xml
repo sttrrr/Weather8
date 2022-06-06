@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Weather6</string>
+    <string name="weather_app">Weather App</string>
+    <string name="textViewWeather">Выберите источник погоды</string>
+    <string name="openweather">OpenWeather</string>
+    <string name="buttonYandex">Yandex</string>
+    <string name="buttonGoogle">Google</string>
+    <string name="errorName">Введите название города</string>
+    <string name="text_pressure">Атмосферное давление</string>
+    <string name="hud_text">Влажность</string>
+    <string name="wind_text">Скорость ветра</string>
+    <string name="feels_like">Ощущается</string>
+    <string name="maxTemp">Макс. температура</string>
+    <string name="minTemp">Мин. температура</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

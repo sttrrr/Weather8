@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
 
         <TableRow
             android:layout_width="match_parent"
@@ -25,21 +26,25 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 />
             <ImageView
                 android:id="@+id/forecast_icon"
                 android:layout_width="110dp"
                 android:layout_height="70px"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/min_temp_forecast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/max_temp_forecast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 />
 
 
@@ -52,21 +57,25 @@
                 android:id="@+id/date1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 />
             <ImageView
                 android:id="@+id/forecast_icon1"
                 android:layout_width="110dp"
                 android:layout_height="70px"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/min_temp_forecast1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/max_temp_forecast1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 />
 
 
@@ -79,21 +88,25 @@
                 android:id="@+id/date2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 />
             <ImageView
                 android:id="@+id/forecast_icon2"
                 android:layout_width="110dp"
                 android:layout_height="70px"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/min_temp_forecast2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 />
             <TextView
                 android:id="@+id/max_temp_forecast2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 />
 
 

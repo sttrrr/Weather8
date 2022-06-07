@@ -167,56 +167,6 @@ public class WeatherYandex extends AppCompatActivity {
                 textViewMinTemp.setText(minTemp + "м/с");
 
 
-                switch(icon)
-                {
-                    case "1000":
-                        textViewMainIcon.setImageResource(R.drawable.d01);
-                        break;
-                    case "1003":
-                        textViewMainIcon.setImageResource(R.drawable.d04);
-                        break;
-
-                    case "1006":
-                        textViewMainIcon.setImageResource(R.drawable.d03);
-                        break;
-                    case "1009":
-                        textViewMainIcon.setImageResource(R.drawable.d03);
-                        break;
-                    case "04n":
-                        textViewMainIcon.setImageResource(R.drawable.d04);
-                        break;
-                    case "04d":
-                        textViewMainIcon.setImageResource(R.drawable.d04);
-                        break;
-                    case "1063":
-                        textViewMainIcon.setImageResource(R.drawable.d09);
-                        break;
-                    case "09d":
-                        textViewMainIcon.setImageResource(R.drawable.d09);
-                        break;
-                    case "1195":
-                        textViewMainIcon.setImageResource(R.drawable.d10);
-                        break;
-                    case "1183":
-                        textViewMainIcon.setImageResource(R.drawable.d10);
-                        break;
-                    case "1087":
-                        textViewMainIcon.setImageResource(R.drawable.d11);
-                        break;
-
-                    case "1069":
-                        textViewMainIcon.setImageResource(R.drawable.d13);
-                        break;
-                    case "1066":
-                        textViewMainIcon.setImageResource(R.drawable.d13);
-                        break;
-                    case "1117":
-                        textViewMainIcon.setImageResource(R.drawable.d50);
-                        break;
-                    case "1030":
-                        textViewMainIcon.setImageResource(R.drawable.d50);
-                        break;
-                }
 
 
 

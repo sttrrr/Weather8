@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,9 +31,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class OpenWeather extends AppCompatActivity {
+    private static Map<String, String> nameDesc = new HashMap<String, String>();;
     private TextView textViewCity;
     private TextView textViewTemp;
     private ImageView textViewMainIcon;
@@ -44,6 +48,9 @@ public class OpenWeather extends AppCompatActivity {
     private TextView textViewMinTemp;
     private TextView textViewLike;
     private TextView textViewAdvice;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +71,30 @@ public class OpenWeather extends AppCompatActivity {
         textViewMaxTemp = findViewById(R.id.max_text);
         textViewMinTemp = findViewById(R.id.min_text);
         textViewLike = findViewById(R.id.feels_like_text);
+
         //textViewAdvice = findViewById(R.id.advice_text);
 
-String url = "https://api.weather.yandex.ru/v2/forecast?lat=56.852728&lon=53.213253";
+String url = "https://api.weather.yandex.ru/v2/forecast?q="+cityWeather+"&hours=false&limit=5&lang=ru_RU";
         //String url = "https://api.openweathermap.org/data/2.5/weather?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&units=metric&lang=ru";
         //String url = "https://api.openweathermap.org/data/2.5/forecast?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&cnt=3&units=metric";
         new GetURLData().execute(url);
+        nameDesc.put("clear", "Ясно");
+        nameDesc.put("partly-cloudy ", "Облачно с прояснениями");
+        nameDesc.put("cloudy","Облачно");
+        nameDesc.put("overcast","Пасмурно");
+        nameDesc.put("drizzle","Морось");
+        nameDesc.put("light-rain","Небольшой дождь");
+        nameDesc.put("rain","Дождь");
+        nameDesc.put("moderate-rain","Умеренно сильный дождь");
+        nameDesc.put("continuous-heavy-rain","Долгий сильный дождь");
+        nameDesc.put("showers","Ливень");
+        nameDesc.put("wet-snow","Дождь со снегом");
+        nameDesc.put("snow","Снег");
+        nameDesc.put("snow-showers","Снегопад");
+        nameDesc.put("hail","Град");
+        nameDesc.put("thunderstorm","Гроза");
+        nameDesc.put("thunderstorm-with-rain","Дождь с грозой");
+        nameDesc.put("thunderstorm-with-hail","Гроза с градом");
 
 
 
@@ -136,7 +161,7 @@ String url = "https://api.weather.yandex.ru/v2/forecast?lat=56.852728&lon=53.213
 
         // Выполняется после завершения получения данных
         @RequiresApi(api = Build.VERSION_CODES.M)
-        @SuppressLint("SetTextI18n")
+        @SuppressLint({"SetTextI18n", "CheckResult"})
         @Override
         public void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -146,15 +171,19 @@ String url = "https://api.weather.yandex.ru/v2/forecast?lat=56.852728&lon=53.213
                 JSONArray forecast = json.getJSONArray("forecasts");
                 JSONObject parts = forecast.getJSONObject(0).getJSONObject("parts");
                 JSONObject night = parts.getJSONObject("night");
+                JSONObject day = parts.getJSONObject("day_short");
                 int temp_min = night.getInt("temp_min");
-                int temp_max = night.getInt("temp_max");
-
+                int temp_max = day.getInt("temp");
+                String icon = fact.getString("icon");
                 int Temperature= fact.getInt("temp");
                 int likeTemp = fact.getInt("feels_like");
                 int wind_speed = fact.getInt("wind_speed");
                 int preassure = fact.getInt("pressure_mm");
                 int hudmunity = fact.getInt("humidity");
                 String description = fact.getString("condition");
+                textViewDescription.setText(nameDesc.get(description));
+
+
 
 
 
@@ -185,71 +214,12 @@ String url = "https://api.weather.yandex.ru/v2/forecast?lat=56.852728&lon=53.213
                 textViewTemp.setText(Temperature + "°C");
                 textViewWindText.setText( wind_speed+ " м/с");
                 textViewHundText.setText(hudmunity + "%");
-                textViewRainText.setText((int)(preassure*0.75) + " мм.рт.ст");
-                textViewDescription.setText(description);
+                textViewRainText.setText(preassure + " мм.рт.ст");
+
                 textViewLike.setText(likeTemp + "°C");
                 textViewMaxTemp.setText(temp_max + "°C");
                 textViewMinTemp.setText(temp_min + "°C");
-
-/*
-                //вывод картинки в зависимости от погоды
-                switch(object.getString("icon"))
-                {
-                    case "01d":
-                        textViewMainIcon.setImageResource(R.drawable.d01);
-                        break;
-                    case "01n":
-                        textViewMainIcon.setImageResource(R.drawable.n01);
-                        break;
-                    case "02d":
-                        textViewMainIcon.setImageResource(R.drawable.d02);
-                        break;
-                    case "02n":
-                        textViewMainIcon.setImageResource(R.drawable.n02);
-                        break;
-                    case "03d":
-                        textViewMainIcon.setImageResource(R.drawable.d03);
-                        break;
-                    case "03n":
-                        textViewMainIcon.setImageResource(R.drawable.d03);
-                        break;
-                    case "04n":
-                        textViewMainIcon.setImageResource(R.drawable.d04);
-                        break;
-                    case "04d":
-                        textViewMainIcon.setImageResource(R.drawable.d04);
-                        break;
-                    case "09n":
-                        textViewMainIcon.setImageResource(R.drawable.d09);
-                        break;
-                    case "09d":
-                        textViewMainIcon.setImageResource(R.drawable.d09);
-                        break;
-                    case "10n":
-                        textViewMainIcon.setImageResource(R.drawable.d10);
-                        break;
-                    case "10d":
-                        textViewMainIcon.setImageResource(R.drawable.d10);
-                        break;
-                    case "11n":
-                        textViewMainIcon.setImageResource(R.drawable.d11);
-                        break;
-                    case "11d":
-                        textViewMainIcon.setImageResource(R.drawable.d11);
-                        break;
-                    case "13n":
-                        textViewMainIcon.setImageResource(R.drawable.d13);
-                        break;
-                    case "13d":
-                        textViewMainIcon.setImageResource(R.drawable.d13);
-                        break;
-                    case "50n":
-                        textViewMainIcon.setImageResource(R.drawable.d50);
-                        break;
-                    case "50d":
-                        textViewMainIcon.setImageResource(R.drawable.d50);
-                        break;
-                }*/
+seticon(description,textViewMainIcon);
 
 
 
@@ -259,11 +229,77 @@ String url = "https://api.weather.yandex.ru/v2/forecast?lat=56.852728&lon=53.213
         }
     }
 
+    public static void seticon(String num, ImageView icon){
+        switch(num)
+        {
+            case "clear":
+                icon.setImageResource(R.drawable.clear);
+                break;
+            case "partly-cloudy":
+                icon.setImageResource(R.drawable.partly_cloudy);
+                break;
+            case "cloudy":
+                icon.setImageResource(R.drawable.cloudy);
+                break;
+            case "overcast":
+                icon.setImageResource(R.drawable.overcast);
+                break;
+            case "drizzle":
+                icon.setImageResource(R.drawable.drizzle);
+                break;
+            case "light-rain":
+                icon.setImageResource(R.drawable.light_rain);
+                break;
+            case "rain":
+                icon.setImageResource(R.drawable.rain);
+                break;
+            case "moderate-rain":
+                icon.setImageResource(R.drawable.rain);
+                break;
+            case "heavy-rain":
+                icon.setImageResource(R.drawable.heavy_rain);
+                break;
+            case "continuous-heavy-rain":
+                icon.setImageResource(R.drawable.continous_heavy_rain);
+                break;
+            case "showers":
+                icon.setImageResource(R.drawable.heavy_rain);
+                break;
+            case "wet-snow":
+                icon.setImageResource(R.drawable.wet_snow);
+                break;
+            case "light-snow":
+                icon.setImageResource(R.drawable.snow);
+                break;
+            case "snow":
+                icon.setImageResource(R.drawable.snow);
+                break;
+            case "snow-showers":
+                icon.setImageResource(R.drawable.snow_showers);
+                break;
+            case "hail":
+                icon.setImageResource(R.drawable.hail);
+                break;
+            case "thunderstorm":
+                icon.setImageResource(R.drawable.thunderstorm);
+                break;
+            case "thunderstorm-with-rain":
+                icon.setImageResource(R.drawable.thunderstorm);
+                break;
+            case "thunderstorm-with-hail":
+                icon.setImageResource(R.drawable.thunderstorm);
+                break;
+        }
 
+    }
 
+    public static Map<String, String> getNameDesc() {
+        return nameDesc;
+    }
 
-
-
+    public void setNameDesc(Map<String, String> nameDesc) {
+        this.nameDesc = nameDesc;
+    }
 }
 
 

@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="101dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/icons8100"
+            android:src="@drawable/main_icons"
             app:tint="@android:color/white"
             />
 

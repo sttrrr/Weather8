@@ -35,6 +35,7 @@
 
             android:minHeight="48dp"
             android:textColor="@color/white"
+            android:textColorHint="#E8D9D9"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
@@ -64,7 +65,7 @@
             android:fontFamily="@font/merriweather_light"
             android:onClick="btnOWonClick"
             android:stateListAnimator="@null"
-
+            android:background="?android:selectableItemBackground"
             android:text="@string/openweather"
             android:translationZ="10dp" />
 

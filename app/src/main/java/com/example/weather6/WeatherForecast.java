@@ -59,7 +59,7 @@ public class WeatherForecast extends AppCompatActivity {
         new GetURLData().execute(url);
     }
 
-        @SuppressLint("StaticFieldLeak")
+
         public class GetURLData extends AsyncTask<String, String, String> {
 
             // Будет выполняться во время подключения по URL

@@ -22,12 +22,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 public class OpenWeather extends AppCompatActivity {
     private TextView textViewCity;
@@ -63,8 +66,8 @@ public class OpenWeather extends AppCompatActivity {
         textViewLike = findViewById(R.id.feels_like_text);
         //textViewAdvice = findViewById(R.id.advice_text);
 
-
-        String url = "https://api.openweathermap.org/data/2.5/weather?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&units=metric&lang=ru";
+String url = "https://api.weather.yandex.ru/v2/forecast?lat=56.852728&lon=53.213253";
+        //String url = "https://api.openweathermap.org/data/2.5/weather?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&units=metric&lang=ru";
         //String url = "https://api.openweathermap.org/data/2.5/forecast?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&cnt=3&units=metric";
         new GetURLData().execute(url);
 
@@ -91,7 +94,10 @@ public class OpenWeather extends AppCompatActivity {
                 // Создаем URL подключение, а также HTTP подключение
                 URL url = new URL(strings[0]);
                 connection = (HttpURLConnection)url.openConnection();
+                connection.setRequestProperty("X-Yandex-API-Key","19c1d270-aad8-46f7-b9c7-dc1a7a966085");
                 connection.connect();
+                connection.setRequestMethod("POST");
+
 
                 // Создаем объекты для считывания данных из файла
                 InputStream stream = connection.getInputStream();
@@ -136,7 +142,25 @@ public class OpenWeather extends AppCompatActivity {
             super.onPostExecute(result);
             try {
                 JSONObject json = new JSONObject(result);
-                JSONArray array = json.getJSONArray("weather");
+                JSONObject fact = json.getJSONObject("fact");
+                JSONArray forecast = json.getJSONArray("forecasts");
+                JSONObject parts = forecast.getJSONObject(0).getJSONObject("parts");
+                JSONObject night = parts.getJSONObject("night");
+                int temp_min = night.getInt("temp_min");
+                int temp_max = night.getInt("temp_max");
+
+                int Temperature= fact.getInt("temp");
+                int likeTemp = fact.getInt("feels_like");
+                int wind_speed = fact.getInt("wind_speed");
+                int preassure = fact.getInt("pressure_mm");
+                int hudmunity = fact.getInt("humidity");
+                String description = fact.getString("condition");
+
+
+
+
+
+           /*     JSONArray array = json.getJSONArray("weather");
                 JSONObject object = array.getJSONObject(0);
                 JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                 String description = object.getString("description");
@@ -155,19 +179,19 @@ public class OpenWeather extends AppCompatActivity {
                 //максимальная и минимальная температура
                 int maxTemp = main.getInt("temp_max");
                 int minTemp = main.getInt("temp_min");
-                int likeTemp = main.getInt("feels_like");
+                int likeTemp = main.getInt("feels_like");*/
 
 //выводим все это на экран
                 textViewTemp.setText(Temperature + "°C");
-                textViewWindText.setText( windSpeed+ " м/с");
-                textViewHundText.setText(Humidity + "%");
-                textViewRainText.setText((int)(Pressure*0.75) + " мм.рт.ст");
-                textViewDescription.setText(details.getString("description"));
+                textViewWindText.setText( wind_speed+ " м/с");
+                textViewHundText.setText(hudmunity + "%");
+                textViewRainText.setText((int)(preassure*0.75) + " мм.рт.ст");
+                textViewDescription.setText(description);
                 textViewLike.setText(likeTemp + "°C");
-                textViewMaxTemp.setText(maxTemp + "°C");
-                textViewMinTemp.setText(minTemp + "°C");
+                textViewMaxTemp.setText(temp_max + "°C");
+                textViewMinTemp.setText(temp_min + "°C");
 
-
+/*
                 //вывод картинки в зависимости от погоды
                 switch(object.getString("icon"))
                 {
@@ -225,7 +249,7 @@ public class OpenWeather extends AppCompatActivity {
                     case "50d":
                         textViewMainIcon.setImageResource(R.drawable.d50);
                         break;
-                }
+                }*/
 
 
 

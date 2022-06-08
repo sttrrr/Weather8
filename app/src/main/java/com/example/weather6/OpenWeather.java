@@ -16,8 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-import com.bumptech.glide.Glide;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +46,8 @@ public class OpenWeather extends AppCompatActivity {
     private TextView textViewMinTemp;
     private TextView textViewLike;
     private TextView textViewAdvice;
+public String cityWeather;
+
 
 
 
@@ -58,7 +58,7 @@ public class OpenWeather extends AppCompatActivity {
 
 
 
-        String cityWeather = getIntent().getStringExtra("city");
+        cityWeather = getIntent().getStringExtra("city");
 
         textViewMainIcon = findViewById(R.id.weather_icon);
         textViewCity = findViewById(R.id.cityTextBiew);
@@ -71,10 +71,10 @@ public class OpenWeather extends AppCompatActivity {
         textViewMaxTemp = findViewById(R.id.max_text);
         textViewMinTemp = findViewById(R.id.min_text);
         textViewLike = findViewById(R.id.feels_like_text);
-
-        //textViewAdvice = findViewById(R.id.advice_text);
-
+        String url1 = "https://geocode-maps.yandex.ru/1.x/?format=json&apikey=0f9c671e-c7f0-4da2-90f8-e6a9faaaee13&geocode="+cityWeather;
+new GetURLData1.execute(url1);
 String url = "https://api.weather.yandex.ru/v2/forecast?q="+cityWeather+"&hours=false&limit=5&lang=ru_RU";
+
         //String url = "https://api.openweathermap.org/data/2.5/weather?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&units=metric&lang=ru";
         //String url = "https://api.openweathermap.org/data/2.5/forecast?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&cnt=3&units=metric";
         new GetURLData().execute(url);
@@ -100,7 +100,10 @@ String url = "https://api.weather.yandex.ru/v2/forecast?q="+cityWeather+"&hours=
 
 
 
+
     }
+
+
 
     public class GetURLData extends AsyncTask<String, String, String> {
 
@@ -300,7 +303,78 @@ seticon(description,textViewMainIcon);
     public void setNameDesc(Map<String, String> nameDesc) {
         this.nameDesc = nameDesc;
     }
-}
+
+    public class GetURLData1 extends AsyncTask<String, String, String> {
+
+        // Будет выполнено до отправки данных по URL
+        protected void onPreExecute() {
+            super.onPreExecute();
+            textViewTemp.setText("Ожидайте...");
+        }
+        // Будет выполняться во время подключения по URL
+        @Override
+        public String doInBackground(@NonNull String... strings) {
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                // Создаем URL подключение, а также HTTP подключение
+                URL url = new URL(strings[0]);
+                connection = (HttpURLConnection)url.openConnection();
+
+                connection.connect();
+
+
+
+                // Создаем объекты для считывания данных из файла
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                // Генерируемая строка
+                StringBuilder buffer = new StringBuilder();
+                String line = "";
+
+                // Считываем файл и записываем все в строку
+                while((line = reader.readLine()) != null)
+                    buffer.append(line).append("\n");
+
+                // Возвращаем строку
+                return buffer.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                // Закрываем соединения
+                if(connection != null)
+                    connection.disconnect();
+
+                try {
+                    if (reader != null)
+                        reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        // Выполняется после завершения получения данных
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        @SuppressLint({"SetTextI18n", "CheckResult"})
+        @Override
+        public void onPostExecute(String result) {
+            super.onPostExecute(result);
+            try {
+                JSONObject json = new JSONObject(result);
+                String lat = json.getJSONObject("response").getJSONObject("GeoObjectCollection").getJSONArray("featureMember").getJSONObject(4).getJSONObject("boundedBy").getJSONObject("Envelope").getString("lowerCorner");
+
+
+} catch (JSONException e) {
+                e.printStackTrace();
+            }}}}
 
 
 

@@ -148,6 +148,7 @@ public class WeatherYandex extends AppCompatActivity {
                 int windSpeed = current.getInt("wind_mph");
                 int Pressure = current.getInt("pressure_mb");
                 int Humidity = current.getInt("humidity");
+                int iconCode = current.getJSONObject("condition").getInt("code");
                 int likeTemp = current.getInt("feelslike_c");
                 int minTemp = current.getInt("gust_mph");
                 int maxTemp = current.getInt("precip_mm");
@@ -166,7 +167,7 @@ public class WeatherYandex extends AppCompatActivity {
                 textViewMaxTemp.setText(maxTemp + "мм");
                 textViewMinTemp.setText(minTemp + "м/с");
 
-
+                seticon(textViewMainIcon,icon);
 
 
 
@@ -178,7 +179,99 @@ public class WeatherYandex extends AppCompatActivity {
 
 
 
+    public static void seticon(ImageView text, String code){
+        switch(code)
+        {
+            case "1000":
+                text.setImageResource(R.drawable.clear);
+                break;
+            case "1003":
+                text.setImageResource(R.drawable.partly_cloudy);
+                break;
+            case "1006":
+                text.setImageResource(R.drawable.cloudy);
+                break;
+            case "1009":
+                text.setImageResource(R.drawable.overcast);
+                break;
+            case "1030":
+                text.setImageResource(R.drawable.drizzle);
+                break;
+            case "1153":
+                text.setImageResource(R.drawable.light_rain);
+                break;
+            case "1183":
+                text.setImageResource(R.drawable.light_rain);
+                break;
+            case "1180":
+                text.setImageResource(R.drawable.light_rain);
+                break;
+
+            case "1186":
+                text.setImageResource(R.drawable.rain);
+                break;
+            case "1189":
+                text.setImageResource(R.drawable.rain);
+                break;
+            case "1192":
+                text.setImageResource(R.drawable.rain);
+                break;
+            case "1195":
+                text.setImageResource(R.drawable.heavy_rain);
+                break;
+            case "1198":
+                text.setImageResource(R.drawable.heavy_rain);
+                break;
+            case "1243":
+                text.setImageResource(R.drawable.continous_heavy_rain);
+                break;
+            case "1246":
+                text.setImageResource(R.drawable.continous_heavy_rain);
+                break;
+            case "1240":
+                text.setImageResource(R.drawable.heavy_rain);
+                break;
+            case "1114":
+                text.setImageResource(R.drawable.wet_snow);
+                break;
+
+
+            case "1066":
+                text.setImageResource(R.drawable.snow);
+                break;
+            case "1210":
+                text.setImageResource(R.drawable.snow);
+                break;
+            case "1213":
+                text.setImageResource(R.drawable.snow);
+                break;
+            case "1216":
+                text.setImageResource(R.drawable.snow);
+                break;
+            case "1222":
+                text.setImageResource(R.drawable.snow_showers);
+                break;
+            case "1225":
+                text.setImageResource(R.drawable.snow_showers);
+                break;
+
+            case "1168":
+                text.setImageResource(R.drawable.hail);
+                break;
+            case "1171":
+                text.setImageResource(R.drawable.hail);
+                break;
+            case "1279":
+                text.setImageResource(R.drawable.thunderstorm);
+                break;
+            case "1276":
+                text.setImageResource(R.drawable.thunderstorm);
+                break;
+            case "1282":
+                text.setImageResource(R.drawable.thunderstorm);
+                break;
+        }
 
 
 
-}
+}}

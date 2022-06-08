@@ -19,9 +19,6 @@
             android:name=".WeatherForecast"
             android:exported="false" />
         <activity
-            android:name=".WeatherGoogle"
-            android:exported="false" />
-        <activity
             android:name=".WeatherYandex"
             android:exported="false" />
         <activity

@@ -11,10 +11,15 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 EditText citySearch;
-String city;
+static String city;
     Button btnOpenWeather;
     Button btnY ;
     Button btnG;
+
+
+    public static String getCity() {
+        return city;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +29,6 @@ String city;
         btnOpenWeather = (Button) findViewById(R.id.buttonOW);
         btnY = findViewById(R.id.buttonY);
          btnG = findViewById(R.id.buttonForecast);
-
 
     }
     public void btnOWonClick(View view) {
@@ -53,9 +57,6 @@ String city;
             Toast.makeText(MainActivity.this, R.string.errorName, Toast.LENGTH_LONG).show();
         else {
             Intent intent = new Intent(this, WeatherForecast.class);
-            intent.putExtra("city",citySearch.getText().toString());
-            startActivity(intent);
-            Intent intent1 = new Intent(this, OneFragment.class);
             intent.putExtra("city",citySearch.getText().toString());
             startActivity(intent);
     }

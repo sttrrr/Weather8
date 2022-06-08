@@ -38,7 +38,11 @@ static String city;
         else {
         Intent intent = new Intent(this, OpenWeather.class);
         intent.putExtra("city",citySearch.getText().toString());
+            Intent intent1 = new Intent(this, GetURLData1.class);
+            intent1.putExtra("city",citySearch.getText().toString());
         startActivity(intent);
+        startActivity(intent1);
+
     }}
 
     public void btnYonClick(View view) {
@@ -49,6 +53,8 @@ static String city;
             Intent intent = new Intent(this, WeatherYandex.class);
             intent.putExtra("city",citySearch.getText().toString());
             startActivity(intent);
+
+
     }}
 
     public void btnGonClick(View view) {

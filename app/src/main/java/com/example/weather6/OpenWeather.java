@@ -35,8 +35,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.net.ssl.HttpsURLConnection;
-
 public class OpenWeather extends AppCompatActivity {
     private static Map<String, String> nameDesc = new HashMap<String, String>();;
     private TextView textViewCity;
@@ -50,8 +48,7 @@ public class OpenWeather extends AppCompatActivity {
     private TextView textViewMinTemp;
     private TextView textViewLike;
     private TextView textViewAdvice;
-    private String lat;
-    private String lon;
+
 
 
     @Override
@@ -76,9 +73,8 @@ public class OpenWeather extends AppCompatActivity {
         textViewLike = findViewById(R.id.feels_like_text);
 
         //textViewAdvice = findViewById(R.id.advice_text);
-      String url1 = "https://geocode-maps.yandex.ru/1.x/?format=json&apikey=0f9c671e-c7f0-4da2-90f8-e6a9faaaee13&geocode="+cityWeather;
-      new Connected().execute(url1);
-        String url = "https://api.weather.yandex.ru/v2/forecast?lat="+lat+"&lon="+lon+"&hours=true&limit=5&lang=ru_RU";
+
+String url = "https://api.weather.yandex.ru/v2/forecast?q="+cityWeather+"&hours=false&limit=5&lang=ru_RU";
         //String url = "https://api.openweathermap.org/data/2.5/weather?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&units=metric&lang=ru";
         //String url = "https://api.openweathermap.org/data/2.5/forecast?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&cnt=3&units=metric";
         new GetURLData().execute(url);
@@ -99,8 +95,12 @@ public class OpenWeather extends AppCompatActivity {
         nameDesc.put("thunderstorm","Гроза");
         nameDesc.put("thunderstorm-with-rain","Дождь с грозой");
         nameDesc.put("thunderstorm-with-hail","Гроза с градом");
-    }
 
+
+
+
+
+    }
 
     public class GetURLData extends AsyncTask<String, String, String> {
 
@@ -293,71 +293,12 @@ seticon(description,textViewMainIcon);
 
     }
 
+    public static Map<String, String> getNameDesc() {
+        return nameDesc;
+    }
 
     public void setNameDesc(Map<String, String> nameDesc) {
         this.nameDesc = nameDesc;
-    }
-
-     class Connected extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-            try {
-                URL url = new URL(strings[0]);
-                connection = (HttpsURLConnection)url.openConnection();
-                connection.connect();
-
-                InputStream stream = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                // Генерируемая строка
-                StringBuilder buffer = new StringBuilder();
-                String line = "";
-
-                // Считываем файл и записываем все в строку
-                while ((line = reader.readLine()) != null)
-                    buffer.append(line).append("\n");
-
-                // Возвращаем строку
-                return buffer.toString();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                // Закрываем соединения
-                if (connection != null)
-                    connection.disconnect();
-
-                try {
-                    if (reader != null)
-                        reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            return null;}
-        @RequiresApi(api = Build.VERSION_CODES.M)
-        @SuppressLint({"SetTextI18n", "CheckResult"})
-        @Override
-        public void onPostExecute(String result) {
-            super.onPostExecute(result);
-            try {
-
-                JSONObject json1 = new JSONObject(result);
-
-
-               String coord = json1.getJSONObject("response").getJSONObject("GeoObjectCollection").getJSONArray("featureMember").getJSONObject(0).getJSONObject("boundedBy").getJSONObject("Envelope").getString("lowerCorner");
-
-                String[] parts = coord.split(" ");
-                lat = parts[0];
-                lon = parts[1];
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
 

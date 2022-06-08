@@ -1,8 +1,14 @@
 package com.example.weather6;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +18,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class GetURLData extends AsyncTask<String, String, String> {
 
 
+public class GetURLData1 extends AsyncTask<String, String, String> {
+
+
+    String url = "https://geocode-maps.yandex.ru/1.x/?apikey=0f9c671e-c7f0-4da2-90f8-e6a9faaaee13&geocode=Краснодар";
 
     // Будет выполняться во время подключения по URL
     @Override
@@ -27,6 +36,8 @@ public class GetURLData extends AsyncTask<String, String, String> {
             URL url = new URL(strings[0]);
             connection = (HttpURLConnection)url.openConnection();
             connection.connect();
+
+
 
             // Создаем объекты для считывания данных из файла
             InputStream stream = connection.getInputStream();
@@ -62,4 +73,16 @@ public class GetURLData extends AsyncTask<String, String, String> {
 
         return null;
     }
+
+    // Выполняется после завершения получения данных
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint({"SetTextI18n", "CheckResult"})
+    @Override
+    public void onPostExecute(String result) {
+        super.onPostExecute(result);
+        try {
+            JSONObject json = new JSONObject(result);
+
+        }
+
 }

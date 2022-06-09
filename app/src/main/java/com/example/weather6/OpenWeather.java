@@ -3,8 +3,7 @@ package com.example.weather6;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
+
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,7 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,6 +32,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
@@ -49,7 +49,7 @@ public class OpenWeather extends AppCompatActivity {
     private TextView textViewMaxTemp;
     private TextView textViewMinTemp;
     private TextView textViewLike;
-    private TextView textViewAdvice;
+
 public String cityWeather;
 
 
@@ -273,17 +273,8 @@ seticon(description,textViewMainIcon);
 
     }
 
-    public static Map<String, String> getNameDesc() {
-        return nameDesc;
     }
 
-    public void setNameDesc(Map<String, String> nameDesc) {
-        this.nameDesc = nameDesc;
-    }
-
-
-
-}
 
 
 

@@ -31,10 +31,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class WeatherYandex extends FragmentActivity {
+public class WeatherYandex extends AppCompatActivity {
     private TextView textViewCity;
     private TextView textViewTemp;
-    private ImageView textViewMainIcon;
+    private ImageView textViewMainIcon,iconswind,iconshud;
     private TextView textViewHundText;
     private TextView textViewRainText;
     private TextView textViewWindText;
@@ -42,7 +42,8 @@ public class WeatherYandex extends FragmentActivity {
     private TextView textViewMaxTemp;
     private TextView textViewMinTemp;
     private TextView textViewLike;
-    private TextView textViewAdvice;
+
+
     private  TextView descMinTemp;
     private TextView descMaxTemp;
     @Override
@@ -50,10 +51,9 @@ public class WeatherYandex extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_weather);
 
-
-
         String cityWeather = getIntent().getStringExtra("city");
-
+        iconshud = findViewById(R.id.min_icon);
+        iconswind = findViewById(R.id.max_icon);
         textViewMainIcon = findViewById(R.id.weather_icon);
         textViewCity = findViewById(R.id.cityTextBiew);
         textViewTemp = findViewById(R.id.tempWeather);
@@ -67,18 +67,10 @@ public class WeatherYandex extends FragmentActivity {
         textViewLike = findViewById(R.id.feels_like_text);
         descMinTemp = findViewById(R.id.min_desc);
         descMaxTemp = findViewById(R.id.max_desc);
-        //textViewAdvice = findViewById(R.id.advice_text);
-        //textViewCity.setText(cityWeather);
-
-
 
         String url = "https://api.weatherapi.com/v1/current.json?key=31b6f87fed5b4159b6c190704222105&lang=ru&q="+cityWeather+"&aqi=yes";
 
         new GetURLData().execute(url);
-
-
-
-
 
     }
 
@@ -149,14 +141,13 @@ public class WeatherYandex extends FragmentActivity {
                 int windSpeed = current.getInt("wind_mph");
                 int Pressure = current.getInt("pressure_mb");
                 int Humidity = current.getInt("humidity");
-                int iconCode = current.getJSONObject("condition").getInt("code");
+
                 int likeTemp = current.getInt("feelslike_c");
                 int minTemp = current.getInt("gust_mph");
                 int maxTemp = current.getInt("precip_mm");
                 String icon = current.getJSONObject("condition").getString("code");
                 descMinTemp.setText("Порывы ветра");
                 descMaxTemp.setText("Осадки");
-
 
 //выводим все это на экран
                 textViewDescription.setText(description);
@@ -167,10 +158,9 @@ public class WeatherYandex extends FragmentActivity {
                 textViewLike.setText(likeTemp + "°C");
                 textViewMaxTemp.setText(maxTemp + "мм");
                 textViewMinTemp.setText(minTemp + "м/с");
-
+                iconshud.setImageResource(R.drawable.icons8_gudmm);
+                iconswind.setImageResource(R.drawable.indporyv);
                 seticon(textViewMainIcon,icon);
-
-
 
             } catch (JSONException e) {
                 e.printStackTrace();

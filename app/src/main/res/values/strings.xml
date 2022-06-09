@@ -15,6 +15,16 @@
     <string name="minTemp">Мин. температура</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="helpers"><center><b>Как пользоваться?\n</b></center>
+                               <b>Назначение кнопок:\n</b>
+                               \n<b>OpenWeather</b> - Просмотр текущей погоды с одноименного сервиса.\n
+                               <b>Yandex</b> - просмотр текущей погоды предоставленной Яндексом.\n
+                               <b>Прогноз</b> - просмотр прогноза, а также текущей погоды.\n
+                                \n
+                               <b>Инструкция:</b>\n
+                               \n1) Ввести необходимый город в поле для ввода текста на русском языке\n
+                               2) нажать на нужную вам кнопку\n
+                               3) Смотреть погоду"</string>
 
 
 </resources>

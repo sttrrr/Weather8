@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +19,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 EditText citySearch;
@@ -41,9 +45,10 @@ final EditText citySe = findViewById(R.id.editTextSearch);
          btnG = findViewById(R.id.buttonForecast);
 
 
-
     }
-    public void btnOWonClick(View view) {
+
+
+        public void btnOWonClick(View view) {
         citySearch = findViewById(R.id.editTextSearch);
         if(citySearch.getText().toString().trim().equals(""))
             Toast.makeText(MainActivity.this, R.string.errorName, Toast.LENGTH_LONG).show();
@@ -82,7 +87,8 @@ final EditText citySe = findViewById(R.id.editTextSearch);
     }
 
 
-    public void btnRepeat(View view) {
-
+    public void btnHelpClick(View view) {
+        RelativeLayout layout = findViewById(R.id.relative);
+        layout.setVisibility(layout.VISIBLE);
     }
 }

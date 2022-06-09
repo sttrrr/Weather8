@@ -22,6 +22,7 @@
             android:id="@+id/welcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/merriweather_light"
             android:text="@string/weather_app"
             android:textAlignment="center"
@@ -32,11 +33,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/merriweather_light_italic"
-            android:textAlignment="center"
+            android:foregroundTint="#FFFFFF"
             android:minHeight="48dp"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textColorHint="#E8D9D9"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:textColorHint="@color/white"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:layout_marginBottom="20dp"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -45,6 +48,7 @@
             android:layout_marginTop="20dp"
             android:src="@drawable/main_icons"
             app:tint="@android:color/white"
+            android:layout_marginBottom="20dp"
             />
 
         <TextView
@@ -85,17 +89,6 @@
             android:onClick="btnGonClick"
             android:text="@string/buttonForecast"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Последний город:" />
-
-        <ListView
-            android:id="@+id/cityRepeat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
@@ -103,8 +96,35 @@
             android:layout_marginTop="10dp"
             android:backgroundTint="#3EB8EF"
             android:fontFamily="@font/merriweather_light"
-            android:onClick="btnRepeat"
-            android:text=" Повторить поиск" />
+            android:onClick="btnHelpClick"
+            android:text="Инструкция" />
+
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="25dp"
+        android:background="#7000"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/Helpers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/merriweather_light"
+            android:text="@string/helpers"
+            android:textColor="@color/white"
+            android:textAlignment="center"/>
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

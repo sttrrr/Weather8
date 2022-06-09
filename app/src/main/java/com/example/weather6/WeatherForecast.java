@@ -221,6 +221,8 @@ public class WeatherForecast extends FragmentActivity {
                 OpenWeather.seticon(description5,icon5);
                 OpenWeather.seticon(description,iconWeatherForecast);
 
+
+
                 temp1.setText(temp_min_day1 + "°C"+"/"+temp_max_day1 + "°C");
                 temp2.setText(temp_min_day2 + "°C"+"/"+temp_max_day2 + "°C");
                 temp3.setText(temp_min_day3 + "°C"+"/"+temp_max_day3 + "°C");

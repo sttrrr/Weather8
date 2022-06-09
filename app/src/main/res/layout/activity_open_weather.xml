@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".OpenWeather"
     android:background="@drawable/phonemain"
-    android:textColor="#FF3700B3"
     android:id="@+id/openWeatherAct"
+    android:fitsSystemWindows="true"
     >
 
     <LinearLayout
@@ -17,7 +17,8 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="25dp">
 
         <!-- главный блок -->
         <TextView

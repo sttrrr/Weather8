@@ -3,37 +3,38 @@ package com.example.weather6;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
-import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 
 public class OpenWeather extends AppCompatActivity {
     private static Map<String, String> nameDesc = new HashMap<String, String>();;
@@ -48,6 +49,11 @@ public class OpenWeather extends AppCompatActivity {
     private TextView textViewMinTemp;
     private TextView textViewLike;
     private TextView textViewAdvice;
+public String cityWeather;
+
+
+
+
 
 
 
@@ -55,10 +61,21 @@ public class OpenWeather extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_weather);
+        cityWeather = getIntent().getStringExtra("city");
+
+       // String url1 = "http://api.openweathermap.org/geo/1.0/direct?q="+cityWeather+"&limit=1&appid=4d414a5f570776be9b49ec722a459a33";
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocationName(cityWeather,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Double lat = addresses.get(0).getLatitude();
+        Double lon = addresses.get(0).getLongitude();
 
 
 
-        String cityWeather = getIntent().getStringExtra("city");
 
         textViewMainIcon = findViewById(R.id.weather_icon);
         textViewCity = findViewById(R.id.cityTextBiew);
@@ -72,9 +89,8 @@ public class OpenWeather extends AppCompatActivity {
         textViewMinTemp = findViewById(R.id.min_text);
         textViewLike = findViewById(R.id.feels_like_text);
 
-        //textViewAdvice = findViewById(R.id.advice_text);
+String url = "https://api.weather.yandex.ru/v2/forecast?lat="+lat+"&lon="+lon+"&hours=false&limit=5&lang=ru_RU";
 
-String url = "https://api.weather.yandex.ru/v2/forecast?q="+cityWeather+"&hours=false&limit=5&lang=ru_RU";
         //String url = "https://api.openweathermap.org/data/2.5/weather?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&units=metric&lang=ru";
         //String url = "https://api.openweathermap.org/data/2.5/forecast?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&cnt=3&units=metric";
         new GetURLData().execute(url);
@@ -96,11 +112,10 @@ String url = "https://api.weather.yandex.ru/v2/forecast?q="+cityWeather+"&hours=
         nameDesc.put("thunderstorm-with-rain","Дождь с грозой");
         nameDesc.put("thunderstorm-with-hail","Гроза с градом");
 
-
-
-
-
     }
+
+
+
 
     public class GetURLData extends AsyncTask<String, String, String> {
 
@@ -182,34 +197,6 @@ String url = "https://api.weather.yandex.ru/v2/forecast?q="+cityWeather+"&hours=
                 int hudmunity = fact.getInt("humidity");
                 String description = fact.getString("condition");
                 textViewDescription.setText(nameDesc.get(description));
-
-
-
-
-
-
-
-           /*     JSONArray array = json.getJSONArray("weather");
-                JSONObject object = array.getJSONObject(0);
-                JSONObject details = json.getJSONArray("weather").getJSONObject(0);
-                String description = object.getString("description");
-                String icons = object.getString("icon");
-                JSONObject main = json.getJSONObject("main");
-//температура
-
-                int Temperature = main.getInt("temp");
-                //влажность
-                int Humidity = main.getInt("humidity");
-//давление
-                int Pressure = main.getInt("pressure");
-//скорость ветра
-                JSONObject wind = json.getJSONObject("wind");
-                int windSpeed = wind.getInt("speed");
-                //максимальная и минимальная температура
-                int maxTemp = main.getInt("temp_max");
-                int minTemp = main.getInt("temp_min");
-                int likeTemp = main.getInt("feels_like");*/
-
 //выводим все это на экран
                 textViewTemp.setText(Temperature + "°C");
                 textViewWindText.setText( wind_speed+ " м/с");
@@ -300,6 +287,9 @@ seticon(description,textViewMainIcon);
     public void setNameDesc(Map<String, String> nameDesc) {
         this.nameDesc = nameDesc;
     }
+
+
+
 }
 
 

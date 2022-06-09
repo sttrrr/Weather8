@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/merriweather_light"
             android:textAlignment="center"
-            android:textSize="60sp" />
+            android:textSize="50sp" />
 
                 <ImageView
                     android:id="@+id/weather_icon"
@@ -53,7 +53,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/merriweather_light"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
 
             </LinearLayout>

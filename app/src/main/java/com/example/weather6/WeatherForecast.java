@@ -2,6 +2,8 @@ package com.example.weather6;
 
 
 import android.annotation.SuppressLint;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +26,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.Locale;
 
 public class WeatherForecast extends AppCompatActivity {
       private  TextView textView1;
@@ -35,6 +39,7 @@ public class WeatherForecast extends AppCompatActivity {
     private TextView temp1;
     private TextView temp2;
     private TextView temp3;
+    private TextView city;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,8 @@ public class WeatherForecast extends AppCompatActivity {
         setContentView(R.layout.activity_weather_forecast);
         String cityWeather = getIntent().getStringExtra("city");
         //инициализация переменных
+        city = findViewById(R.id.cityText);
+        city.setText(cityWeather);
         textView1 = findViewById(R.id.date);
         textView2 = findViewById(R.id.date1);
         textView3 = findViewById(R.id.date2);
@@ -52,8 +59,18 @@ public class WeatherForecast extends AppCompatActivity {
         temp2= findViewById(R.id.temp1);
         temp3= findViewById(R.id.temp2);
 
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocationName(cityWeather,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Double lat = addresses.get(0).getLatitude();
+        Double lon = addresses.get(0).getLongitude();
 
-        String url = "https://api.weather.yandex.ru/v2/forecast?q="+cityWeather+"&hours=true&limit=5&lang=ru_RU";
+
+        String url = "https://api.weather.yandex.ru/v2/forecast?lat="+lat+"&lon="+lon+"&hours=false&limit=5&lang=ru_RU";
         //String url = "https://api.openweathermap.org/data/2.5/weather?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&units=metric&lang=ru";
         //String url = "https://api.openweathermap.org/data/2.5/forecast?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&cnt=3&units=metric";
 
@@ -125,20 +142,24 @@ public class WeatherForecast extends AppCompatActivity {
                 JSONObject json = new JSONObject(result);
                 JSONObject fact = json.getJSONObject("fact");
                 JSONArray forecast = json.getJSONArray("forecasts");
-                JSONObject parts1 = forecast.getJSONObject(0).getJSONObject("parts");
-                JSONObject parts2 = forecast.getJSONObject(1).getJSONObject("parts");
-                JSONObject parts3 = forecast.getJSONObject(2).getJSONObject("parts");
+
                 //JSONObject hours1 = forecast.getJSONObject(0).getJSONArray("hours").getJSONObject(0);
                // JSONObject hours2 = forecast.getJSONObject(1).getJSONArray("hours").getJSONObject(0);
                // JSONObject hours3 = forecast.getJSONObject(0).getJSONArray("hours").getJSONObject(0);
+                JSONObject parts1 = forecast.getJSONObject(0).getJSONObject("parts");
+                JSONObject parts2 = forecast.getJSONObject(1).getJSONObject("parts");
+                JSONObject parts3 = forecast.getJSONObject(2).getJSONObject("parts");
 
                 String date = forecast.getJSONObject(0).getString("date");
                 String date1 = forecast.getJSONObject(1).getString("date");
                 String date2 = forecast.getJSONObject(2).getString("date");
 
-                int temp = parts1.getJSONObject("day").getInt("temp");
-                int temp_1 = parts2.getJSONObject("day").getInt("temp");
-                int temp_2 = parts3.getJSONObject("day").getInt("temp");
+                int temp_min_day1 = forecast.getJSONObject(0).getJSONObject("parts").getJSONObject("day").getInt("temp_min");
+                int temp_max_day1 =  forecast.getJSONObject(0).getJSONObject("parts").getJSONObject("night").getInt("temp_max");
+                int temp_max_day2 =  forecast.getJSONObject(1).getJSONObject("parts").getJSONObject("night").getInt("temp_max");
+                int temp_max_day3 =  forecast.getJSONObject(2).getJSONObject("parts").getJSONObject("night").getInt("temp_max");
+                int temp_min_day2 = forecast.getJSONObject(1).getJSONObject("parts").getJSONObject("day").getInt("temp_min");
+                int temp_min_day3 = forecast.getJSONObject(2).getJSONObject("parts").getJSONObject("day").getInt("temp_min");
 
 
 
@@ -157,9 +178,9 @@ public class WeatherForecast extends AppCompatActivity {
                 OpenWeather.seticon(description1,icon1);
                 OpenWeather.seticon(description2,icon2);
                 OpenWeather.seticon(description3,icon3);
-                temp1.setText(temp);
-                temp2.setText(temp_1);
-                temp3.setText(temp_2);
+                temp1.setText(temp_min_day1 + "°C"+"/"+temp_max_day1 + "°C");
+                temp2.setText(temp_min_day2 + "°C"+"/"+temp_max_day2 + "°C");
+                temp3.setText(temp_min_day3 + "°C"+"/"+temp_max_day3 + "°C");
 
 
 

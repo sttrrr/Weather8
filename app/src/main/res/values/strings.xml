@@ -5,6 +5,7 @@
     <string name="openweather">OpenWeather</string>
     <string name="buttonYandex">Yandex</string>
     <string name="buttonGoogle">Google</string>
+    <string name="buttonForecast">Прогноз погоды</string>
     <string name="errorName">Введите название города</string>
     <string name="text_pressure">Атмосферное давление</string>
     <string name="hud_text">Влажность</string>

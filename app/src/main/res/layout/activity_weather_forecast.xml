@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpenWeather"
-    android:background="@drawable/phonemain"
-    android:textColor="#FF3700B3"
+
+    android:background="@drawable/forecast_background"
+    android:textColor="@color/black"
 
     >
 
@@ -15,18 +15,19 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="15dp">
+            >
 
             <TextView
                 android:id="@+id/date"
+
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginBottom="10dp"
@@ -34,16 +35,21 @@
                 android:textAlignment="center"
                 android:visibility="visible"
                 android:layout_marginLeft="5dp"
+                android:fontFamily="@font/merriweather_light"
+                android:textColor="@color/white"
                 />
+
             <ImageView
                 android:id="@+id/forecast_icon"
-                android:layout_width="133dp"
+                android:layout_width="70px"
                 android:layout_height="70px"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="0.3"
-                tools:layout_editor_absoluteX="138dp"
-                tools:layout_editor_absoluteY="333dp"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginBottom="5dp"
+
                 />
+
             <TextView
                 android:id="@+id/temp"
                 android:layout_width="match_parent"
@@ -53,21 +59,17 @@
                 android:textAlignment="center"
                 android:visibility="visible"
                 android:layout_marginLeft="5dp"
-                />
+                android:fontFamily="@font/merriweather_light"
+                android:textColor="@color/white"/>
 
 
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="15dp"
-            android:fontFamily="@font/merriweather_light"
-            android:textAlignment="center"
-            android:textSize="24sp">
+        <TableRow>
 
             <TextView
                 android:id="@+id/date1"
+
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginBottom="10dp"
@@ -75,16 +77,21 @@
                 android:textAlignment="center"
                 android:visibility="visible"
                 android:layout_marginLeft="5dp"
-                />
+                android:fontFamily="@font/merriweather_light"
+                android:textColor="@color/white"/>
+
             <ImageView
                 android:id="@+id/forecast_icon1"
-                android:layout_width="133dp"
+
+                android:layout_width="70px"
                 android:layout_height="70px"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="0.3"
-                tools:layout_editor_absoluteX="138dp"
-                tools:layout_editor_absoluteY="333dp"
-                />
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginBottom="5dp"
+
+                 />
+
             <TextView
                 android:id="@+id/temp1"
                 android:layout_width="match_parent"
@@ -94,20 +101,17 @@
                 android:textAlignment="center"
                 android:visibility="visible"
                 android:layout_marginLeft="5dp"
-                />
+                android:fontFamily="@font/merriweather_light"
+                android:textColor="@color/white"/>
 
 
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginBottom="15dp"
-            android:fontFamily="@font/merriweather_light"
-            android:textAlignment="center"
-            android:textSize="24sp">
+        <TableRow>
+
             <TextView
                 android:id="@+id/date2"
+
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginBottom="10dp"
@@ -115,16 +119,20 @@
                 android:textAlignment="center"
                 android:visibility="visible"
                 android:layout_marginLeft="5dp"
-                />
+                android:fontFamily="@font/merriweather_light"
+                android:textColor="@color/white"/>
+
             <ImageView
                 android:id="@+id/forecast_icon2"
-                android:layout_width="133dp"
+
+                android:layout_width="70px"
                 android:layout_height="70px"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="0.3"
-                tools:layout_editor_absoluteX="138dp"
-                tools:layout_editor_absoluteY="333dp"
+                android:textAlignment="center"
+                android:visibility="visible"
+                android:layout_marginBottom="5dp"
                 />
+
             <TextView
                 android:id="@+id/temp2"
                 android:layout_width="match_parent"
@@ -134,11 +142,22 @@
                 android:textAlignment="center"
                 android:visibility="visible"
                 android:layout_marginLeft="5dp"
-                />
+                android:fontFamily="@font/merriweather_light"
+                android:textColor="@color/white"/>
 
         </TableRow>
 
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/cityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/merriweather_light"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

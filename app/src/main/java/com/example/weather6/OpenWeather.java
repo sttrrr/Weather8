@@ -3,41 +3,42 @@ package com.example.weather6;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 public class OpenWeather extends AppCompatActivity {
-    private static Map<String, String> nameDesc = new HashMap<String, String>();;
+    public static Map<String, String> nameDesc = new HashMap<String, String>();
     private TextView textViewCity;
     private TextView textViewTemp;
     private ImageView textViewMainIcon;
@@ -54,28 +55,14 @@ public String cityWeather;
 
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_weather);
+
+
+
         cityWeather = getIntent().getStringExtra("city");
-
-       // String url1 = "http://api.openweathermap.org/geo/1.0/direct?q="+cityWeather+"&limit=1&appid=4d414a5f570776be9b49ec722a459a33";
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        List<Address> addresses = null;
-        try {
-            addresses = geocoder.getFromLocationName(cityWeather,1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Double lat = addresses.get(0).getLatitude();
-        Double lon = addresses.get(0).getLongitude();
-
-
-
 
         textViewMainIcon = findViewById(R.id.weather_icon);
         textViewCity = findViewById(R.id.cityTextBiew);
@@ -89,10 +76,18 @@ public String cityWeather;
         textViewMinTemp = findViewById(R.id.min_text);
         textViewLike = findViewById(R.id.feels_like_text);
 
-String url = "https://api.weather.yandex.ru/v2/forecast?lat="+lat+"&lon="+lon+"&hours=false&limit=5&lang=ru_RU";
+        android.location.Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocationName(cityWeather,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Double lat = addresses.get(0).getLatitude();
+        Double lon = addresses.get(0).getLongitude();
+        String url = "https://api.weather.yandex.ru/v2/forecast?lat="+lat+"&lon="+lon+"&hours=false&limit=5&lang=ru_RU";
 
-        //String url = "https://api.openweathermap.org/data/2.5/weather?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&units=metric&lang=ru";
-        //String url = "https://api.openweathermap.org/data/2.5/forecast?q="+ cityWeather+"&appid=4d414a5f570776be9b49ec722a459a33&cnt=3&units=metric";
+
         new GetURLData().execute(url);
         nameDesc.put("clear", "Ясно");
         nameDesc.put("partly-cloudy ", "Облачно с прояснениями");
@@ -111,9 +106,7 @@ String url = "https://api.weather.yandex.ru/v2/forecast?lat="+lat+"&lon="+lon+"&
         nameDesc.put("thunderstorm","Гроза");
         nameDesc.put("thunderstorm-with-rain","Дождь с грозой");
         nameDesc.put("thunderstorm-with-hail","Гроза с градом");
-
     }
-
 
 
 

@@ -85,5 +85,26 @@
             android:onClick="btnGonClick"
             android:text="@string/buttonForecast"/>
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Последний город:" />
+
+        <ListView
+            android:id="@+id/cityRepeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#3EB8EF"
+            android:fontFamily="@font/merriweather_light"
+            android:onClick="btnRepeat"
+            android:text=" Повторить поиск" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

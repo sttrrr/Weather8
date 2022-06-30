@@ -127,7 +127,7 @@ public String cityWeather;
                 // Создаем URL подключение, а также HTTP подключение
                 URL url = new URL(strings[0]);
                 connection = (HttpURLConnection)url.openConnection();
-                connection.setRequestProperty("X-Yandex-API-Key","19c1d270-aad8-46f7-b9c7-dc1a7a966085");
+                connection.setRequestProperty("X-Yandex-API-Key","0043f6fb-de83-4a81-a61b-9153b06d451d");
                 connection.connect();
                 connection.setRequestMethod("POST");
 
